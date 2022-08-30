@@ -9,11 +9,11 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: ./mvnw -Dmaven.test.skip=true package
+      - run: mvn build 
       - persist_to_workspace:
          root: ./
          paths:
-           - target/home/manavchokshi/Documents/User/Selenium_Workplace/testing
+           - home/manavchokshi/Documents/User/Selenium_Workplace/testing
 
   test:
     docker:
@@ -25,7 +25,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ./target
-      - run: ./mvnw test
+      - run: mvn run
 
 workflows:
   version: 2
