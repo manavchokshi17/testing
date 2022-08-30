@@ -13,7 +13,7 @@ jobs:
       - persist_to_workspace:
          root: ./
          paths:
-           - home/manavchokshi/Documents/User/Selenium_Workplace/testing
+           - target/surefire-reports
 
   test:
     docker:
