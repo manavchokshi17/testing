@@ -33,7 +33,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: ./target
       - aws-s3/sync:
           arguments: |
             --acl public-read \
