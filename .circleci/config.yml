@@ -1,5 +1,6 @@
 version: 2.0
-
+orbs:
+  aws-s3: circleci/aws-s3@3.0
 jobs:
   build:
     docker:
@@ -28,15 +29,25 @@ jobs:
       - run: mvn clean install
   Deploy:
     docker:
-      - image: cimg/openjdk:17.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: 'cimg/python:3.6'
+       
     steps:
       - checkout
       - attach_workspace:
           at: ./target
-      - run: mvn clean install
+      - aws-s3/sync:
+          arguments: |
+            --acl public-read \
+            --cache-control "max-age=86400"
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          from: surefire-reports
+          to: 's3://deployaws17'
+      - aws-s3/copy:
+          arguments: '--dryrun'
+          from: surefire-reports
+          to: 's3://deployaws17'
+      
 workflows:
   version: 2
 
