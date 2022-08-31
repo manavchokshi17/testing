@@ -10,7 +10,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: mvn clean
+      - run: mvn clean install
       - persist_to_workspace:
          root: ./
          paths:
