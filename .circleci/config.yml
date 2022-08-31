@@ -1,4 +1,4 @@
-version: 2.0
+version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@3.0
 jobs:
@@ -10,7 +10,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: mvn clean install 
+      - run: mvn clean
       - persist_to_workspace:
          root: ./
          paths:
@@ -28,8 +28,8 @@ jobs:
           at: ./target
       - run: mvn clean install
   Deploy:
-    machine:
-      image: 'cimg/python:3.6'
+    docker:
+      - image: 'cimg/python:3.6'
     steps:
       - checkout
       - attach_workspace:
