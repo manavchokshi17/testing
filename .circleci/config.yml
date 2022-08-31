@@ -30,7 +30,6 @@ jobs:
   Deploy:
     docker:
       - image: 'cimg/python:3.6'
-       
     steps:
       - checkout
       - attach_workspace:
