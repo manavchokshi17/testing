@@ -17,7 +17,6 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run: mvn dependency:go-offline
-      - run: sudo npm install -g webdriver-manager
       - run:
           name: Running X virtual framebuffer
           command: Xvfb :0 -ac &
