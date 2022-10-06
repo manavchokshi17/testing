@@ -29,6 +29,7 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
       # run tests!
+      - run: java --version
       - run: mvn clean test
       - store_artifacts:
           path: target/surefire-reports
@@ -36,5 +37,3 @@ jobs:
 
       - store_test_results:
           path: target/surefire-reports
-            
-             
